@@ -2,6 +2,11 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.hiltAndroid)
+
+    id("kotlin-parcelize")
 }
 
 android {
@@ -53,6 +58,16 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+
+    //Retrofit
+    implementation(libs.square.retrofit2)
+    implementation(libs.square.gson)
+
+    //Dagger
+    implementation(libs.hilt.android)
+    implementation(libs.androidx.navigation.compose.android)
+    ksp(libs.hilt.compiler)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
