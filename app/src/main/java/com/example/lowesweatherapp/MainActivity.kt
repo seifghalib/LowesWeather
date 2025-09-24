@@ -1,6 +1,7 @@
 package com.example.lowesweatherapp
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
@@ -10,6 +11,7 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.lowesweatherapp.screens.SetupNavGraph
@@ -35,6 +37,8 @@ class MainActivity : ComponentActivity() {
                 val state = response
                 navController = rememberNavController()
 
+                val context = LocalContext.current
+
                 SetupNavGraph(
                     navController = navController,
                     viewModel = viewModel,
@@ -48,7 +52,7 @@ class MainActivity : ComponentActivity() {
 
                     when (state) {
                         is ApiState.Failure -> {
-                            println("LIBU ${state.msg}")
+                            Toast.makeText(context, state.msg, Toast.LENGTH_SHORT).show()
                         }
 
                         ApiState.Loading -> CircularProgressIndicator()
